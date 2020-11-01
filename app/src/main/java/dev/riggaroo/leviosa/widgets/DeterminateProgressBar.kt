@@ -1,5 +1,6 @@
 package dev.riggaroo.leviosa.widgets
 
+
 import androidx.compose.animation.animatedFloat
 import androidx.compose.animation.core.AnimationConstants
 import androidx.compose.animation.core.FastOutSlowInEasing
@@ -17,36 +18,30 @@ import androidx.compose.runtime.onActive
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.LinearGradient
-import androidx.compose.ui.graphics.SolidColor
-import androidx.compose.ui.graphics.StrokeCap
-import androidx.compose.ui.graphics.TileMode
+import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
-import dev.riggaroo.leviosa.ui.gray
 import dev.riggaroo.leviosa.ui.purple200
 import dev.riggaroo.leviosa.ui.purple500
 import dev.riggaroo.leviosa.ui.purple700
 import kotlin.math.roundToInt
 
 @Composable
-fun DeterminateProgressBar(modifier: Modifier = Modifier, progress: Float,
+fun DeterminateProgressBar(modifier: Modifier = Modifier,
+                           progress: Float,
                            progressColors: List<Color> = listOf(purple200, purple500, purple700),
                            backgroundColor: Color = MaterialTheme.colors.onSurface.copy(alpha = 0.2f),
                            textStyle: TextStyle = MaterialTheme.typography.h5,
                            textColor: Color = MaterialTheme.colors.onBackground) {
+
     val drawStyle = remember { Stroke(width = 16.dp.value, cap = StrokeCap.Round) }
     val brush = remember {
         if (progressColors.size == 1){
             SolidColor(progressColors[0])
         } else {
-            LinearGradient(progressColors,
-                    0f, 0f, 200f, 200f, TileMode.Mirror)
+            HorizontalGradient(progressColors, 0f,  200f, TileMode.Mirror)
         }
     }
 
@@ -75,7 +70,7 @@ fun DeterminateProgressBar(modifier: Modifier = Modifier, progress: Float,
             // Background of Progress bar
             drawArc(brush = brushBackground,
                     startAngle = 0f,
-                    sweepAngle = 360f,
+                    sweepAngle = PROGRESS_FULL_DEGREES,
                     useCenter = false,
                     style = drawStyle)
             // Rotate the whole canvas to move the whole animation to show movement even when the progress doesn't change

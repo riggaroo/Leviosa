@@ -43,7 +43,7 @@ fun DefaultPreview() {
     }
 }
 
-@Preview()
+@Preview
 @Composable
 fun ProgressDarkTheme() {
     LeviosaTheme(darkTheme = true) {
